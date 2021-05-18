@@ -5,4 +5,4 @@ from . models import Locker
 class LockerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Locker
-        field = '__all__'
+        fields = '__all__'
