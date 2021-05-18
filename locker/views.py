@@ -17,9 +17,16 @@ def apiOverview(request):
 
     return Response(api_urls)
 
+
 @api_view(["GET"])
 def getAllLockers(request):
-    locker = Locker.objects.all()
-    serializer = LockerSerializer(locker, many=True)
+    lockers = Locker.objects.all()
+    serializer = LockerSerializer(lockers, many=True)
     return Response(serializer.data)
-    
+
+
+@api_view(["GET"])
+def viewLocker(request, pk):
+    locker = Locker.objects.get(id=pk)
+    serializer = LockerSerializer(locker, many=False)
+    return Response(serializer.data)
