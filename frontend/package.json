@@ -6,11 +6,13 @@
     "build": "vite build"
   },
   "dependencies": {
-    "tailwindcss": "^2.1.2",
     "vue": "^3.0.0-rc.1"
   },
   "devDependencies": {
-    "vite": "^1.0.0-rc.1",
-    "@vue/compiler-sfc": "^3.0.0-rc.1"
+    "@vue/compiler-sfc": "^3.0.0-rc.1",
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
+    "vite": "^1.0.0-rc.1"
   }
 }
