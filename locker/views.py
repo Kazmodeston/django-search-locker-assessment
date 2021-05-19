@@ -38,3 +38,13 @@ def searchLocker(request):
     lockers = Locker.objects.filter(city__icontains=city)
     serializer = LockerSerializer(lockers, many=True)
     return Response(serializer.data)
+
+
+@api_view(["POST"])
+def createLocker(request):
+    serializer = LockerSerializer(data = request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+    
+    return Response(serializer.data)
