@@ -6,7 +6,11 @@
     "build": "vite build"
   },
   "dependencies": {
-    "vue": "^3.0.0-rc.1"
+    "@bundled-es-modules/axios": "^0.21.1",
+    "axios": "^0.21.1",
+    "v-axios": "^3.0.6",
+    "vue": "^3.0.0-rc.1",
+    "vue3-use-axios": "^0.2.2"
   },
   "devDependencies": {
     "@vue/compiler-sfc": "^3.0.0-rc.1",

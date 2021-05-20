@@ -21,7 +21,7 @@
     </div>
     <div class="bg-cover bg-center" style="background-image:url(../img/banner.jpg);">
         <h1 class="text-red-600 text-medium pl-4 pt-20 font-bold md:justify-end">Find a Locker</h1><br>
-        <input type="search" placeholder="Enter City or State" name="locker" id="" class="xl:ml-4 sm:ml-10 mb-12 xl:w-1/2 sm:w-small h-16 border-0 ">
+        <input type="search" placeholder="Enter City or State" name="locker" v-model="keyword" id="" class="xl:ml-4 sm:ml-10 mb-12 xl:w-1/2 sm:w-small h-16 border-0 ">
     </div>
     <div class="md:bg-secondary-200 sm:bg-red-600 lg:bg-primary xl:bg-secondary-200 h-14 w-full flex">
         <p class="pt-2 pl-4 text-xl text-white w-3/4 font-mono">6 Open Lockers Available</p>
@@ -54,30 +54,13 @@
             </div>
 
             <div class="w-full">
-                <table class="table-auto w-large ml-10 border-separate border-green-800 ...">
-                    <tr class="h-4 border bg-secondary-400 border-green-600 mb-20">
-                        <td class=" w-1/5 ">small H295</td>
-                        <td class="w-1/5 ">small H295 smallsmallsmall</td>
-                        <td class="w-1/5 ">small H295</td>
-                        <td class="w-1/5 ">small H295</td>
-                        <td class="w-1/5 bg-secondary-300 text-center text-white font-bold rounded-lg ">Rent Now</td>
-
-                    </tr>
-                    <tr class="mb-12 bg-secondary-400 px-4 py-4 border border-green-600 ">
-                        <td class="w-1/5 ">small H295</td>
-                        <td class="w-1/5 ">small H295 smallsmallsmallsmall</td>
-                        <td class="w-1/5 ">small H295</td>
-                        <td class="w-1/5 ">small H295</td>
-                        <td class="w-1/5 bg-secondary-300 text-center text-white font-bold rounded-lg py-2 px-2 ">Rent Now</td>
-
-                    </tr>
-                    <tr class="mb-12 bg-secondary-400 px-4 py-4 border border-green-600 ">
-                        <td class="w-1/5 ">small H295</td>
-                        <td class="w-1/5 ">small H295 smallsmallsmall</td>
-                        <td class="w-1/5 ">small H295</td>
-                        <td class="w-1/5 ">small H295</td>
-                        <td class="w-1/5 bg-secondary-300 text-center text-white font-bold rounded-lg py-2 px-2 ">Rent Now</td>
-
+                <table class="table-auto w-large ml-10 ">
+                    <tr class="mb-12 bg-gray-300 px-4 py-4 border m-10 " v-for="locker in lockers" :key="locker.id">
+                        <td class="w-1/5 ">{{locker.locker_name}}</td>
+                        <td class="w-1/5 ">{{locker.price_description}}</td>
+                        <td class="w-1/5 ">{{locker.locker_description}}</td>
+                        <td class="w-1/5 ">{{locker.status}}</td>
+                        <td><button class="bg-green-500 text-center text-white font-bold rounded-sm py-1 px-1 ">Rent Now</button></td>
                     </tr>
                 </table>
                 <div class="ml-10 mt-2">
@@ -86,10 +69,15 @@
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </div>
 </template>
 
+
 <script>
+//const axios = require('axios');
+//import axios from 'axios';
+//import axios from '../dist/axios.js'
 export default {
   name: 'HelloWorld',
   props: {
@@ -97,8 +85,66 @@ export default {
   },
   data() {
     return {
-      count: 0
+      count: 0,
+      keyword: null,
+      lockers: []
     }
-  }
+  },
+
+  watch: {
+    keyword(after, before) {
+      this.getResults();
+    }
+  },
+
+  methods: {
+    /* getResults() {
+            axios.get('/livesearch', { params: { keyword: this.keyword } })
+                .then(res => this.lockers = res.data)
+                .catch(error => {
+                  console.log(error)
+                });
+        }, */
+    
+    /* getName(){
+          const baseURL = "http://localhost:8000/api/"
+       fetch('http://localhost:8000/api/locker-list/'+ this.keyword)
+      .then(response =>{
+        //return response.json()
+        console.log(response.json())
+      })
+      //const data = res.json();
+      //this.data = data;
+      //console.log(res)
+    }, */
+    
+   getResults() {
+
+     if(this.keyword == "")
+     {
+
+     }
+     else
+     {
+            fetch('http://localhost:8000/api/locker-search/'+ this.keyword + "/")
+            .then(response =>response.json())
+            //.then(data => console.log(data))
+            .then(data => this.lockers=data)
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+     }
+
+             
+   },
+
+
+  },
+  created() {
+
+        //this.getName()
+    },
+
+  
 }
 </script>
