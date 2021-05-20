@@ -12,7 +12,7 @@ def apiOverview(request):
         'List' : "/locker-list/",
         'Create' : "/locker-create/",
         'Detail View' : "/locker-detail/<int:id>",
-        'Search' : "/locker-search"
+        'Search' : "/locker-search/<str:city>"
     }
 
     return Response(api_urls)
@@ -32,9 +32,9 @@ def viewLocker(request, pk):
     return Response(serializer.data)
 
 
-@api_view(["POST"])
-def searchLocker(request):
-    city = request.data['city']
+@api_view(["GET"])
+def searchLocker(request, city):
+    # city = request.data['city']
     lockers = Locker.objects.filter(city__icontains=city)
     serializer = LockerSerializer(lockers, many=True)
     return Response(serializer.data)
