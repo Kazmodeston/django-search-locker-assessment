@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@bundled-es-modules/axios": "^0.21.1",
+    "@tailwindcss/forms": "^0.3.2",
     "axios": "^0.21.1",
     "v-axios": "^3.0.6",
     "vue": "^3.0.0-rc.1",
