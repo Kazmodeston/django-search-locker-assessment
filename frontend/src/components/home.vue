@@ -25,8 +25,14 @@
         <div class="">
           <h1 class="text-red-600 text-medium  pt-20 font-bold text-left ml-10">Find a Locker</h1>
            </div>
-           <div class="flex justify-between"> 
-             <div class="w-1/2"><input type="search" placeholder="Enter City or State" name="locker" v-model="keyword" id="" class="mb-12 w-1/2 h-16 border-0 xl:mb-40 xl:w-full xl:ml-10 md:w-full md:ml-10 sm:w-full sm:ml-10"></div>
+           <div class="flex justify-between relative"> 
+             <div class="flex w-full sm:w-full justify-between">
+                  <div class="w-1/2 xs:w-full pr-40"><input type="search" placeholder="Enter City or State" name="locker" v-model="keyword" id="" class="mb-12 w-full h-16 border-0 xl:mb-40 xl:w-full xl:ml-10 md:w-full md:ml-10 sm:w-full sm:ml-10 sm:display-none"></div>  
+                   <div class="bg-red-600 h-12 p-4 mt-2 w-50 ml-96 absolute sm:mr-46">
+                        <h1 class="text-white font-bold -mt-4">Find Locker</h1>
+                        <h1 class="text-xs bg-white px-1">Class First Class First</h1>
+                  </div>
+             </div>
            <div>
             <h1 class="w-1/2"></h1>
            </div>
@@ -90,7 +96,7 @@
                 
             </div>
             <div class="mt-2">
-                    <p><span class="text-red-800">+</span> <span class="text-blue-600 text-sm">View all lockers at this Location</span></p>
+                    <p class="text-left"><span class="text-red-800">+</span> <span class="text-blue-600 text-sm">View all lockers at this Location</span></p>
                 </div>
         </div>
     </div>
@@ -99,7 +105,7 @@
 
 
 <script>
-
+import { baseURL } from "../baseUrl.js";
 export default {
   name: 'HelloWorld',
   props: {
@@ -130,7 +136,7 @@ export default {
      }
      else
      {
-            fetch('http://localhost:8000/api/locker-search/'+ this.keyword + "/")
+            fetch(baseURL + 'locker-search/'+ this.keyword + "/")
             .then(response =>response.json())
             //.then(data => console.log(data))
             .then(data => this.lockers=data)
@@ -153,7 +159,7 @@ export default {
      }
      else
      {
-            fetch('http://localhost:8000/api/locker-search/'+ this.quantity + "/")
+            fetch(baseURL + 'locker-search/'+ this.quantity + "/")
             .then(response =>response.json())
             //.then(data => console.log(data))
             .then(data => this.lockers=data)
@@ -165,13 +171,17 @@ export default {
    },
 
    getAllResults(){
-     fetch('http://localhost:8000/api/locker-list/')
+     fetch(baseURL + 'locker-list/')
             .then(response =>response.json())
             .then(data => this.lockers=data)
             .catch((error) => {
                 console.error('Error:', error);
             });
-   }
+   },
+
+   verifyData(){
+    // if(this.locker)
+   },
 
 
   },
@@ -179,6 +189,7 @@ export default {
 
         this.getAllResults()
     },
+  
 
   
 }
