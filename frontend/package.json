@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "v-axios": "^3.0.6",
     "vue": "^3.0.0-rc.1",
+    "vue-router": "^4.0.8",
     "vue3-use-axios": "^0.2.2"
   },
   "devDependencies": {
