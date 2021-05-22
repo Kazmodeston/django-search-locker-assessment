@@ -84,7 +84,7 @@
                         <td class="w-80 text-left">{{locker.price_description}}</td>
                         <td class="w-90 text-left">{{locker.locker_description}}</td>
                         <td class="w-50 text-left">{{locker.status}}</td>
-                        <td class="w-30 text-left"><button class="bg-green-500 text-center text-white font-bold rounded-sm py-1 px-1 text-sm pl-8 pr-8">Rent Now</button></td>
+                        <td class="w-30 text-left"><router-link to="/rent"><button class="bg-green-500 text-center text-white font-bold rounded-sm py-1 px-1 text-sm pl-8 pr-8">Rent Now</button></router-link></td>
                     </tr> <br>
                 </table>
                 
