@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.db.models import Q
 
 from . serializers import LockerSerializer
 from . models import Locker
@@ -12,7 +13,7 @@ def apiOverview(request):
         'List' : "/locker-list/",
         'Create' : "/locker-create/",
         'Detail View' : "/locker-detail/<int:id>",
-        'Search' : "/locker-search/<str:city>"
+        'Search' : "/locker-search/<str:searchQuery>"
     }
 
     return Response(api_urls)
@@ -33,9 +34,9 @@ def viewLocker(request, pk):
 
 
 @api_view(["GET"])
-def searchLocker(request, city):
+def searchLocker(request, searchQuery):
     # city = request.data['city']
-    lockers = Locker.objects.filter(city__icontains=city)
+    lockers = Locker.objects.filter(Q(city__icontains=searchQuery) | Q(state__icontains=searchQuery) | Q(featured__icontains=searchQuery))
     serializer = LockerSerializer(lockers, many=True)
     return Response(serializer.data)
 
